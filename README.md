@@ -38,6 +38,6 @@ To install the project and its dependencies, follow these steps:
    ```bash
    yarn install
 ### Usage
-3. Install the project using Yarn.
+3. Run the project using Yarn.
    ```bash
    yarn run start
