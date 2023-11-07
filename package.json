@@ -1,0 +1,19 @@
+{
+  "name": "fee_calculator",
+  "version": "1.0.0",
+  "description": "Technical Challenge for NodeJS position for Mishell Sossa",
+  "main": "index.js",
+  "author": "Mishell Sossa",
+  "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

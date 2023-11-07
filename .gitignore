@@ -1,0 +1,86 @@
+# Node.js
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+jspm_packages/
+typings/
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache
+
+# Build files
+dist/
+out/
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.local
+
+# VSCode directories
+.vscode/
+
+# Mac files
+.DS_Store
+
+# Environment configuration
+.env
+.env.local
+.env.test
+.env.development
+.env.production
+
+# Editor directories
+.idea/
+*.suo
+*.ntvs_analysis.dat
+*.suo
+*.user
+*.suo
+*.suo
+*.user
+*.user
+*.suo
+.vscode/
+
+# Sublime Text
+# Cache files for Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# Workspace files are user-specific
+*.sublime-workspace
+
+# SFTP configuration file
+sftp-config.json
+
+# Atlassian IDE Plugin Configuration
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.suo
+*.user
+*.suo
+*.user
+*.suo
