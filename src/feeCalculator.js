@@ -10,10 +10,10 @@ function feeCalculator() {
     
     let orderFeesDetails = [];
     /**
-     * Initializes the data by reading the fees and orders from JSON files and populating the fee map and distribution object.
-     *
-     * @throws {Error} If there is an error reading the JSON files.
-     */
+    * Initializes the data by reading the fees and orders from JSON files and populating the fee map and distribution object.
+    *
+    * @throws {Error} If there is an error reading the JSON files.
+    */
     const initData = () => {
         try{
             const pathToFees = path.resolve('data/fees.json');
@@ -27,11 +27,11 @@ function feeCalculator() {
         fillDistributionObject(parsedFeeData, distributionsObject);
     }
     /**
-     * Calculates the fees detail for a given list of order items.
-     *
-     * @param {Array} orderItems - The list of order items.
-     * @return {Array} - The fees detail for the order items.
-     */
+    * Calculates the fees detail for a given list of order items.
+    *
+    * @param {Array} orderItems - The list of order items.
+    * @return {Array} - The fees detail for the order items.
+    */
     const getFeesDetail = (orderItems) => {
         const detail = [];
         let grandTotal = 0;
@@ -56,12 +56,12 @@ function feeCalculator() {
         return detail;
     }
     /**
-     * Generates a funds detail object based on the given order items and fees detail.
-     *
-     * @param {Array} orderItems - The array of order items.
-     * @param {Object} feesDetail - The fees detail object.
-     * @return {Object} The funds detail object.
-     */
+    * Generates a funds detail object based on the given order items and fees detail.
+    *
+    * @param {Array} orderItems - The array of order items.
+    * @param {Object} feesDetail - The fees detail object.
+    * @return {Object} The funds detail object.
+    */
     const getFundsDetail = (orderItems, feesDetail) => {
         const orderGrandTotal = findGrandTotal(feesDetail);
         let fundDistribution = {};
@@ -82,9 +82,9 @@ function feeCalculator() {
         return returnObject;
     }
     /**
-     * Calculates the totals for each order in the parsed order data.
-     *
-     */
+    * Calculates the totals for each order in the parsed order data.
+    *
+    */
     const calculateTotals = () => {
         parsedOrderData.map((order)=>{
             const {order_items, order_number} = order;
@@ -100,9 +100,9 @@ function feeCalculator() {
         });
     }
     /**
-     * Prints the details of each order in the orderFeesDetails array.
-     *
-     */
+    * Prints the details of each order in the orderFeesDetails array.
+    *
+    */
     const printOrderDetails = () => {
         orderFeesDetails.forEach((order) => {
             const order_items = order.order_details;
@@ -126,65 +126,71 @@ function feeCalculator() {
         });
     }
     /**
-     * Prints the details of the funds.
-     *
-     */
+    * Prints the details of the funds.
+    *
+    */
     const printFundsDetails = () => {
         console.log(`\n*** Funds Details ***\n`);
-
+        
         // Initialize an object to store the totals for each type and fund
         const totals = {};
-      
+        
         orderFeesDetails.forEach((order) => {
-          const order_funds_details = order.order_funds_details;
-          console.log(`Order ID: ${order.order_id}`);
-      
-          for (const type in order_funds_details) {
-            for (const fund in order_funds_details[type]) {
-              if (fund !== 'fund_grand_total') {
-                // Initialize the type in totals object if not already done
-                if (!totals[type]) {
-                  totals[type] = {};
+            const order_funds_details = order.order_funds_details;
+            console.log(`Order ID: ${order.order_id}`);
+            let otherTotal = 0;
+            for (const type in order_funds_details) {
+                
+                for (const fund in order_funds_details[type]) {
+                    
+                    if (fund !== 'fund_grand_total') {
+                        // Initialize the type in totals object if not already done
+                        if (!totals[type]) {
+                            totals[type] = {};
+                        }
+                        
+                        // Initialize the fund in totals[type] object if not already done
+                        if (!totals[type][fund]) {
+                            totals[type][fund] = 0;
+                        }
+                        
+                        // Accumulate the values for each type and fund
+                        totals[type][fund] += order_funds_details[type][fund];
+                        
+                        if (fund === 'other') {
+                            otherTotal += order_funds_details[type][fund];
+                        } else {
+                            console.log(`\tFund - ${fund}: $${order_funds_details[type][fund]}`);
+                        }
+                    }
                 }
-      
-                // Initialize the fund in totals[type] object if not already done
-                if (!totals[type][fund]) {
-                  totals[type][fund] = 0;
-                }
-      
-                // Accumulate the values for each type and fund
-                totals[type][fund] += order_funds_details[type][fund];
-      
-                if (fund === 'other') {
-                  console.log(`\tFund - Other: $${order_funds_details[type][fund]}`);
-                } else {
-                  console.log(`\tFund - ${fund}: $${order_funds_details[type][fund]}`);
-                }
-              }
+                
             }
-          }
+            console.log(`\tFund - Other: $${otherTotal}`);
         });
-      
+        
         // Print the totals
         console.log('\n*** Totals ***\n');
         console.log(`Total distributions: `);
+        let otherTotal = 0;
         for (const type in totals) {
-          for (const fund in totals[type]) {
-            if (fund === 'other') {
-              console.log(`\tFund - Other: $${totals[type][fund]}`);
-            } else {
-              console.log(`\tFund - ${fund}: $${totals[type][fund]}`);
+            for (const fund in totals[type]) {
+                if (fund === 'other') {
+                    otherTotal += totals[type][fund];
+                } else {
+                    console.log(`\tFund - ${fund}: $${totals[type][fund]}`);
+                }
             }
-          }
         }
-        }
-        
-        return {
-            initData,
-            calculateTotals,
-            printOrderDetails,
-            printFundsDetails
-        }
+        console.log(`\tFund - Other: $${otherTotal}`);
     }
     
-    export default feeCalculator;
+    return {
+        initData,
+        calculateTotals,
+        printOrderDetails,
+        printFundsDetails
+    }
+}
+
+export default feeCalculator;
