@@ -16,7 +16,7 @@ export function fillFeeMap(parsedData, map) {
   }
 /**
  * Fills a distribution object with data from parsedData.
- *
+ * Comentario entrenamiento GitHub -
  * @param {Array} parsedData - The parsed data to extract distributions from.
  * @param {Object} map - The map to fill with distribution objects.
  */
