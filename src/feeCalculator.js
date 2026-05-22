@@ -7,8 +7,7 @@ function feeCalculator() {
   let parsedOrderData = null;
   const feesMap = {};
   const distributionsObject = {};
-
-  let orderFeesDetails = "";
+  let orderFeesDetails = undefined;
   /**
    * Initializes the data by reading the fees and orders from JSON files and populating the fee map and distribution object.
    * test
